@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.events</OriginalElement>
+  <nodes>
+    <node x="-271.0" y="597.5">4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.users</node>
+    <node x="-199.0" y="877.5">4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.events</node>
+    <node x="-249.5" y="396.5">4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.roles</node>
+    <node x="-335.0" y="1277.5">4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.reviews</node>
+    <node x="-145.5" y="1157.0">4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.user_event</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.reviews" target="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.events" relationship="REFERENCES">
+      <point x="58.0" y="-84.5" />
+      <point x="-161.0" y="1122.0" />
+      <point x="-79.0" y="1122.0" />
+      <point x="0.0" y="84.5" />
+    </edge>
+    <edge source="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.reviews" target="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.users" relationship="REFERENCES">
+      <point x="-58.0" y="-84.5" />
+      <point x="-277.0" y="1242.0" />
+      <point x="-259.0" y="1242.0" />
+      <point x="-259.0" y="942.0" />
+      <point x="-219.0" y="942.0" />
+      <point x="-219.0" y="802.0" />
+      <point x="-215.0" y="802.0" />
+      <point x="-56.0" y="84.5" />
+    </edge>
+    <edge source="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.user_event" target="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.users" relationship="REFERENCES">
+      <point x="-43.25" y="-45.0" />
+      <point x="-102.25" y="1102.0" />
+      <point x="-219.0" y="1102.0" />
+      <point x="-219.0" y="802.0" />
+      <point x="-215.0" y="802.0" />
+      <point x="-56.0" y="84.5" />
+    </edge>
+    <edge source="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.events" target="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-84.5" />
+      <point x="-79.0" y="842.0" />
+      <point x="-103.0" y="842.0" />
+      <point x="56.0" y="84.5" />
+    </edge>
+    <edge source="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.users" target="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.roles" relationship="REFERENCES">
+      <point x="0.0" y="-84.5" />
+      <point x="0.0" y="45.5" />
+    </edge>
+    <edge source="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.user_event" target="4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.events" relationship="REFERENCES">
+      <point x="43.25" y="-45.0" />
+      <point x="-15.75" y="1122.0" />
+      <point x="-79.0" y="1122.0" />
+      <point x="0.0" y="84.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.0799404397175538" showDependencies="false" x="-84.66989087071244" y="674.0661884960421" />
+  <SelectedNodes>
+    <node>4e8ba0c0-79df-467c-8911-c61c9415d789.TABLE:EventMe_db.public.roles</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

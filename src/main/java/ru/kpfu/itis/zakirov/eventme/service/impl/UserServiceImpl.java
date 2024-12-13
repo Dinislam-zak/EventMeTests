@@ -9,6 +9,7 @@ import ru.kpfu.itis.zakirov.eventme.entity.User;
 import ru.kpfu.itis.zakirov.eventme.service.UserService;
 import ru.kpfu.itis.zakirov.eventme.util.PasswordUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -32,7 +33,8 @@ public class UserServiceImpl implements UserService {
         return new UserDto(
                 user.getUsername(),
                 user.getEmail(),
-                user.getPassword()
+                user.getPassword(),
+                user.getAvatarUrl()
         );
     }
 
@@ -42,7 +44,8 @@ public class UserServiceImpl implements UserService {
         return new UserDto(
                 user.getUsername(),
                 user.getEmail(),
-                user.getPassword()
+                user.getPassword(),
+                user.getAvatarUrl()
         );
     }
 
@@ -50,8 +53,8 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAll() {
         List<User> users = userDao.getAll();
         return users.stream()
-                .map(u -> new UserDto(u.getUsername(), u.getEmail(),u.getPassword()))
-                .toList();
+                .map(u -> new UserDto(u.getUsername(), u.getEmail(),u.getPassword(), u.getAvatarUrl())
+                ).toList();
     }
 
     @Override
@@ -64,8 +67,13 @@ public class UserServiceImpl implements UserService {
                         PasswordUtil.encrypt(password),
                         role,
                         null,
+                        null,
                         null
                 )
         );
+    }
+    @Override
+    public void updateAvatar(String username, String avatarUrl) throws SQLException {
+        userDao.updateAvatar(username, avatarUrl);
     }
 }

@@ -1,5 +1,6 @@
 package ru.kpfu.itis.zakirov.eventme.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import ru.kpfu.itis.zakirov.eventme.dto.UserLoginDto;
 import ru.kpfu.itis.zakirov.eventme.dto.UserDto;
@@ -16,4 +17,6 @@ public interface UserService {
     UserDto getByLogin(String username);
 
     void register(String name, String email, String password, Role role);
+
+    void updateAvatar(String username, String avatarUrl) throws SQLException;
 }

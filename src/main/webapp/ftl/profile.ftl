@@ -12,9 +12,23 @@
         <div class="col-md-6">
             <h2 class="text-center">User Profile</h2>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body text-center">
+                    <!-- Display user avatar -->
+                    <div class="mb-3">
+                        <img src="${user.avatarUrl!}" alt="Avatar" class="rounded-circle" width="150" height="150">
+                    </div>
+
+                    <!-- Upload new avatar -->
+                    <form action="/uploadAvatar" method="post" enctype="multipart/form-data" class="mb-4">
+                        <div class="form-group">
+                            <label for="avatarFile">Change Avatar</label>
+                            <input type="file" name="file" id="avatarFile" class="form-control-file" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Upload Avatar</button>
+                    </form>
+
                     <h5 class="card-title">User Information</h5>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush text-left">
                         <li class="list-group-item"><strong>Username:</strong> ${user.username}</li>
                         <li class="list-group-item"><strong>Password:</strong> ${user.password}</li>
                         <li class="list-group-item"><strong>Email:</strong> ${user.email}</li>

@@ -28,7 +28,8 @@ public class UserDaoImpl implements UserDao {
                         resultSet.getString("password"),
                         new Role(resultSet.getInt("role_id"), null),
                         new ArrayList<>(),
-                        new ArrayList<>()
+                        new ArrayList<>(),
+                        resultSet.getString("avatar_url")
                 );
             }
         } catch (SQLException e) {
@@ -52,7 +53,8 @@ public class UserDaoImpl implements UserDao {
                         resultSet.getString("password"),
                         new Role(resultSet.getInt("role_id"), null),
                         new ArrayList<>(),
-                        new ArrayList<>()
+                        new ArrayList<>(),
+                        resultSet.getString("avatar_url")
                 ));
             }
             return users;
@@ -84,13 +86,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(User user) {
         try {
-            String sql = "UPDATE users SET username = ?, email = ?, password = ?, role_id = ? WHERE id = ?";
+            String sql = "UPDATE users SET username = ?, email = ?, password = ?, role_id = ?, avatar_url = ? WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getRole().getId());
             statement.setInt(5, user.getId());
+            statement.setString(6, user.getAvatarUrl());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error while updating user", e);
@@ -124,12 +127,26 @@ public class UserDaoImpl implements UserDao {
                         resultSet.getString("password"),
                         new Role(resultSet.getInt("role_id"), null),
                         new ArrayList<>(),
-                        new ArrayList<>()
+                        new ArrayList<>(),
+                        resultSet.getString("avatar_url")
                 );
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error while fetching user by email", e);
         }
         return null;
+    }
+
+    @Override
+    public void updateAvatar(String username, String avatarUrl) throws SQLException {
+        String sql = "UPDATE users SET avatar_url = ? WHERE username = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        try  {
+            preparedStatement.setString(1, avatarUrl);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating avatar URL", e);
+        }
     }
 }

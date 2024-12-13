@@ -5,12 +5,14 @@ CREATE TABLE roles (
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role_id INT NOT NULL,
+    avatar_url VARCHAR(255),
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
+
 
 CREATE TABLE events (
     id SERIAL PRIMARY KEY,

@@ -5,25 +5,30 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public final class DatabaseConnectionUtil {
-
-
     private static Connection connection;
 
     public static Connection getConnection() {
-        if (connection == null) {
-            try {
-                Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection(
-                        "jdbc:postgresql://localhost:5432/EventMe_db",
-                        "postgres",
-                        "postgres"
-                );
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+
+
+        String PROD_DB_HOST = System.getenv("PROD_DB_HOST");
+        String PROD_DB_PORT = System.getenv("PROD_DB_PORT");
+        String PROD_DB_PASSWORD = System.getenv("PROD_DB_PASSWORD");
+        String PROD_DB_NAME = System.getenv("PROD_DB_NAME");
+        String PROD_DB_USERNAME = System.getenv("PROD_DB_USERNAME");
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:postgresql://%s:%s/%s"
+                            .formatted(PROD_DB_HOST, PROD_DB_PORT, PROD_DB_NAME),
+                    PROD_DB_USERNAME,
+                    PROD_DB_PASSWORD
+            );
+        } catch (SQLException | ClassNotFoundException e){
+            throw new RuntimeException(e);
         }
+
         return connection;
     }
+
 }

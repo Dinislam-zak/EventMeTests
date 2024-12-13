@@ -14,7 +14,17 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private final UserService userService = new UserServiceImpl();
+    private UserService userService;
+    @Override
+    public void init() throws ServletException {
+        try {
+            userService = new UserServiceImpl();
+        } catch (Exception e) {
+            System.err.println("Ошибка инициализации UserService: " + e.getMessage());
+            userService = null;
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/ftl/login.ftl").forward(req, resp);
@@ -22,6 +32,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (userService == null) {
+            req.setAttribute("errorMessage", "Сервис временно недоступен, попробуйте позже.");
+            req.getRequestDispatcher("/ftl/login.ftl").forward(req, resp);
+            return;
+        }
+
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 

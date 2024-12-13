@@ -11,11 +11,10 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
-    private final Connection connection = DatabaseConnectionUtil.getConnection();
 
     @Override
     public User getById(Integer id) {
-        try {
+        try (Connection connection = DatabaseConnectionUtil.getConnection()){
             String sql = "SELECT * FROM users WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
@@ -40,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        try {
+        try (Connection connection = DatabaseConnectionUtil.getConnection()){
             String sql = "SELECT * FROM users";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -65,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
-        try {
+        try (Connection connection = DatabaseConnectionUtil.getConnection();) {
             String sql = "INSERT INTO users (username, email, password, role_id) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUsername());
@@ -85,7 +84,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(User user) {
-        try {
+        try (Connection connection = DatabaseConnectionUtil.getConnection();){
             String sql = "UPDATE users SET username = ?, email = ?, password = ?, role_id = ?, avatar_url = ? WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user.getUsername());
@@ -102,7 +101,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void delete(Integer id) {
-        try {
+        try (Connection connection = DatabaseConnectionUtil.getConnection();){
             String sql = "DELETE FROM users WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
@@ -114,7 +113,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getByUsername(String username) {
-        try {
+        try (Connection connection = DatabaseConnectionUtil.getConnection();){
             String sql = "SELECT * FROM users WHERE username = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
@@ -139,9 +138,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateAvatar(String username, String avatarUrl) throws SQLException {
-        String sql = "UPDATE users SET avatar_url = ? WHERE username = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        try  {
+        try (Connection connection = DatabaseConnectionUtil.getConnection();){
+            String sql = "UPDATE users SET avatar_url = ? WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, avatarUrl);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
